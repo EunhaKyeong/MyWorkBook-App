@@ -1,12 +1,9 @@
 package com.cookandroid.myworkbook;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -14,15 +11,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 public class LoginDialog extends Dialog {
     private Context context;
     private Button loginBtn, signupBtn;
-    private MyDBHelper myHelper;
-    SQLiteDatabase sqlDB;
+    private DatabaseHelper dbHelper;
     private EditText idEdit, pwdEdit;
 
     public LoginDialog(@NonNull MainActivity context) {
@@ -30,24 +25,15 @@ public class LoginDialog extends Dialog {
         this.context = context;
     }
 
-    //DB 연동
-    public static class MyDBHelper extends SQLiteOpenHelper {
-        public MyDBHelper(Context c) {
-            super(c, "myWorkBookDB.db", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) { }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.login_dialog);
 
+        //DB 설정
+        dbHelper = new DatabaseHelper(this.getContext());
+
+        //다이얼로그 화면 전체화면으로
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(this.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -67,20 +53,13 @@ public class LoginDialog extends Dialog {
     private View.OnClickListener loginClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //DB 설정
-            myHelper = new MyDBHelper(v.getContext());
-            sqlDB = myHelper.getWritableDatabase();
-
             idEdit = findViewById(R.id.idEdit);
             pwdEdit = findViewById(R.id.pwdEdit);
             String strId = idEdit.getText().toString();
             String strPwd = pwdEdit.getText().toString();
 
             //일치하는 회원 정보가 있는지 확인
-            String query = "SELECT * FROM user WHERE userID='" + strId +
-                    "' AND password='" + strPwd + "';";
-            Cursor cursor = sqlDB.rawQuery(query, null);
-
+            Cursor cursor = dbHelper.getUser(strId, strPwd);
             if (cursor.getCount()!=0) {
                 System.out.println("로그인 됐습니다.");
                 idEdit.setText("");
@@ -95,8 +74,6 @@ public class LoginDialog extends Dialog {
             } else {
                 System.out.println("아이디와 비밀번호를 다시 한 번 확인해주세요.");
             }
-
-            sqlDB.close();
         }
     };
 

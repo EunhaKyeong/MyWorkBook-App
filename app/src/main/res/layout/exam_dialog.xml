@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="시험 폴더 생성"
+        android:fontFamily="@font/bmhannaair"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/examNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="시험명을 입력해주세요."
+        android:fontFamily="@font/bmhannaair"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/timeLimitCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="타이머 설정"
+        android:textSize="20sp"
+        android:fontFamily="@font/bmhannaair" />
+
+    <LinearLayout
+        android:id="@+id/timeLimitLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <EditText
+            android:id="@+id/hourET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=":"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/minuteET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=":"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/secondET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+        <Button
+            android:id="@+id/btnAddUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:text="추가"
+            android:fontFamily="@font/bmhannaair"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue" />
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:text="취소"
+            android:fontFamily="@font/bmhannaair"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+</LinearLayout>

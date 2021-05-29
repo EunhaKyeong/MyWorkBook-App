@@ -1,86 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    <GridLayout
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="25dp"
-        android:background="#F9C802">
-
+        android:orientation="horizontal"
+        android:background="#F9C802"
+        android:padding="20dp"
+        android:paddingBottom="10dp">
         <TextView
-            android:layout_width="250dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_rowSpan="2"
-            android:gravity="center_vertical"
-            android:layout_gravity="fill_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
             android:fontFamily="@font/bmhannaair"
             android:text="시험 목록"
             android:textColor="@color/black"
             android:textSize="35sp"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/nicknameTV"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_gravity="center"
-            android:fontFamily="@font/bmhannaair"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
         <Button
             android:id="@+id/logoutBtn"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_gravity="center"
-            android:background="#31BC72"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:background="@drawable/logout_btn"
             android:fontFamily="@font/bmhannaair"
             android:text="logout"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
-    </GridLayout>
-
-    <Button
-        android:id="@+id/plusBtn"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_columnSpan="2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/button_shape"
-        android:fontFamily="@font/bmhannaair"
-        android:text="+"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        tools:ignore="RtlCompat" />
-
-    <GridLayout
-        android:id="@+id/folderGrid"
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="3"
-        android:columnCount="2"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp">
-    </GridLayout>
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/nicknameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:fontFamily="@font/bmhannaair"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
+        <Button
+            android:id="@+id/plusBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:background="@drawable/circle_btn"
+            android:fontFamily="@font/bmhannaair"
+            android:text="+"
+            android:textColor="#000000"
+            android:textSize="45sp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
+    </LinearLayout>
+    <GridView
+        android:id="@+id/examGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:horizontalSpacing="15dp"
+        android:verticalSpacing="15dp">
+    </GridView>
+
 </LinearLayout>
