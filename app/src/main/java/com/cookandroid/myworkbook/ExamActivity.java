@@ -26,7 +26,7 @@ public class ExamActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exam_list);
+        setContentView(R.layout.exam_activity);
 
         //DB 인스턴스 생성
         dbHelper = new ExamHelper(ExamActivity.this);
@@ -42,7 +42,7 @@ public class ExamActivity extends Activity {
         addExamDialog = new ExamDialog(ExamActivity.this, this.userPK, exams);
 
         //화면에 닉네임 출력.
-        nicknameTV.setText(this.nickname + "님 안녕하세요!");
+        nicknameTV.setText(this.nickname + "님");
 
         //그리드뷰 만들기
         bindGrid();

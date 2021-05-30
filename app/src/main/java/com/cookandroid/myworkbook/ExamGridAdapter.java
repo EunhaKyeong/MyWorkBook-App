@@ -1,6 +1,7 @@
 package com.cookandroid.myworkbook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,8 +101,23 @@ public class ExamGridAdapter extends BaseAdapter {
             }
         });
 
-        return convertView;
+        viewHolder.btnExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, QuestionActivity.class);
+                intent.putExtra("examPK", exams.get(position).get("examPK").toString());
+                intent.putExtra("examTitle", exams.get(position).get("examTitle").toString());
+                try {
+                    intent.putExtra("timeLimit", exams.get(position).get("timeLimit").toString());
+                } catch(NullPointerException e) {
+                    intent.putExtra("timeLimit", "");
+                }
 
+                context.startActivity(intent);
+            }
+        });
+
+        return convertView;
     }
 
     public void setButtonItemLongClickListener(AdapterView.OnItemLongClickListener listener) {

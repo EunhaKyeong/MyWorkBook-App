@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:background="@color/mainYellow"
+        android:fontFamily="@font/bmhannaair"
+        android:padding="20dp"
+        android:text="문제 추가하기"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etQTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmhannaair"
+            android:hint="제목을 입력하세요."
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/etQContent"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:fontFamily="@font/bmhannaair"
+                android:hint="이미지를 추가하거나 텍스트로 입력하세요."
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivQContent"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btnImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="20dp"
+            android:background="#F9C802"
+            android:fontFamily="@font/bmhannaair"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="이미지 추가"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etQAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmhannaair"
+            android:hint="정답을 입력하세요."
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAddUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#F9C802"
+            android:fontFamily="@font/bmhannaair"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="추가"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F9C802"
+            android:fontFamily="@font/bmhannaair"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="취소"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
