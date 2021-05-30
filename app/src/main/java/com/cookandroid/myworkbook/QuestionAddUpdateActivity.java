@@ -31,7 +31,7 @@ public class QuestionAddUpdateActivity extends Activity {
     private TextView tvTitle;
     private EditText etQTitle, etQContent, etQAnswer;
     private ImageView ivQContent;
-    private Bitmap
+    private Bitmap questionBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +74,10 @@ public class QuestionAddUpdateActivity extends Activity {
                 questionBitmap = BitmapFactory
                         .decodeByteArray(compressedImg, 0, compressedImg.length);
                 ivQContent.setImageBitmap(questionBitmap);
+                ivQContent.setVisibility(View.VISIBLE);
+                ivQContent.setEnabled(true);
+                etQContent.setVisibility(View.GONE);
+                etQContent.setEnabled(false);
             }
         }
 
