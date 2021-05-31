@@ -26,7 +26,8 @@ public class QuestionAddUpdateActivity extends Activity {
     final static int TAKE_PICTURE = 1;
 
     private QuestionHelper db;
-    private String examPK;
+    private String examPK, mode;
+    HashMap<String, Object> question;
     private Button btnImage, btnAddUpdate, cancelBtn;
     private TextView tvTitle;
     private EditText etQTitle, etQContent, etQAnswer;
@@ -60,10 +61,11 @@ public class QuestionAddUpdateActivity extends Activity {
 
         Intent intent = getIntent();
         if (intent.getStringExtra("mode").equals("CREATE")) {
+            this.mode = "CREATE";
             this.examPK = intent.getStringExtra("examPK");
         } else {
-            HashMap<String, Object> question =
-                    (HashMap<String, Object>) intent.getSerializableExtra("question");
+            this.mode = "UPDATE";
+            this.question = (HashMap<String, Object>) intent.getSerializableExtra("question");
             tvTitle.setText("문제 수정하기");
             etQTitle.setText(question.get("questionTitle").toString());
             etQAnswer.setText(question.get("answer").toString());
@@ -79,6 +81,7 @@ public class QuestionAddUpdateActivity extends Activity {
                 etQContent.setVisibility(View.GONE);
                 etQContent.setEnabled(false);
             }
+            btnAddUpdate.setText("수정하기");
         }
 
         btnImage.setOnClickListener(new View.OnClickListener() {
@@ -106,26 +109,47 @@ public class QuestionAddUpdateActivity extends Activity {
                 }
                 answer = etQAnswer.getText().toString();
 
-                long questionPK = db.addQuestion(title, questionImg, content, answer, examPK);
-                if (questionPK>=0) {
+                String questionPK = "";
+                boolean result = true;
+
+                switch (mode) {
+                    case "CREATE":
+                        long insertedPK = db.addQuestion(title, questionImg, content, answer, examPK);
+                        if (insertedPK>=0) {
+                            questionPK = String.valueOf(insertedPK);
+                        } else {
+                            result = false;
+                        }
+                        break;
+
+                        case "UPDATE":
+                            int updateResult = db.modifyQuestion(question.get("questionPK").toString(), title, questionImg, content, answer);
+                            if (updateResult!=0) {
+                                questionPK = question.get("questionPK").toString();
+                            } else {
+                                result = false;
+                            }
+                            break;
+                }
+
+                if (result) {
                     Intent outIntent =
                             new Intent(QuestionAddUpdateActivity.this, QuestionActivity.class);
-                    outIntent.putExtra("questionPK", String.valueOf(questionPK));
+                    outIntent.putExtra("questionPK", questionPK);
                     outIntent.putExtra("questionTitle", title);
                     outIntent.putExtra("questionImg", questionImg);
                     outIntent.putExtra("questionDesc", content);
                     outIntent.putExtra("answer", answer);
                     setResult(RESULT_OK, outIntent);
                     Toast.makeText(QuestionAddUpdateActivity.this,
-                            "문제 추가 완료!",
+                            "완료!",
                             Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(QuestionAddUpdateActivity.this,
-                            "문제 추가에 실패했습니다.",
+                            "오류가 발생했습니다. 다시 한 번 시도해주세요.",
                             Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 

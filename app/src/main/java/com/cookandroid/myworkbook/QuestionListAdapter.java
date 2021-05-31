@@ -83,7 +83,7 @@ public class QuestionListAdapter extends BaseAdapter {
                                 Intent intent = new Intent(context, QuestionAddUpdateActivity.class);
                                 intent.putExtra("mode", "UPDATE");
                                 intent.putExtra("question", questions.get(position));
-                                ((Activity) context).startActivityForResult(intent, 0);
+                                ((Activity) context).startActivityForResult(intent, 1);
                         }
 
                         return false;

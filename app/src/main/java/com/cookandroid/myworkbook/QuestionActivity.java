@@ -52,7 +52,9 @@ public class QuestionActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode==RESULT_OK) {
+        System.out.println("reequestionCode: " + requestCode);
+
+        if (requestCode==0&&resultCode==RESULT_OK) {    //문제 생성 요청일 때
             HashMap<String, Object> newQuestion = new HashMap<String, Object>();
             newQuestion.put("questionPK", data.getStringExtra("questionPK"));
             newQuestion.put("questionTitle", data.getStringExtra("questionTitle"));
@@ -61,8 +63,16 @@ public class QuestionActivity extends Activity {
             newQuestion.put("answer", data.getStringExtra("answer"));
 
             questions.add(newQuestion);
-            listAdapter.notifyDataSetChanged();
+
+        } else if (requestCode==1&&resultCode==RESULT_OK) { //문제 수정 요청일 때
+            int position = Integer.parseInt(data.getStringExtra("questionPK"))-1;
+            questions.get(position).put("questionTitle", data.getStringExtra("questionTitle"));
+            questions.get(position).put("questionImg", data.getByteArrayExtra("questionImg"));
+            questions.get(position).put("questionDesc", data.getStringExtra("questionDesc"));
+            questions.get(position).put("answer", data.getStringExtra("answer"));
         }
+
+        listAdapter.notifyDataSetChanged();
     }
 
     private void bindGrid() {

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.HashMap;
+
 public class QuestionHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "myWorkBookDB.db";
     public static final String TABLE = "question";
@@ -61,6 +63,22 @@ public class QuestionHelper extends SQLiteOpenHelper {
         Cursor cursor = sqlDB.rawQuery(sql, new String[]{examPK});
 
         return cursor;
+    }
+
+    //question update
+    public int modifyQuestion(String questionPK, String questionTitle, byte[] questionImg,
+                              String questionDesc, String answer) {
+        ContentValues values = new ContentValues();
+        values.put("questionTitle", questionTitle);
+        values.put("questionImg", questionImg);
+        values.put("questionDesc", questionDesc);
+        values.put("answer", answer);
+
+        return sqlDB.update(
+                TABLE,
+                values,
+                "questionPK=?",
+                new String[]{questionPK});
     }
 
     //qustion delete
