@@ -73,7 +73,7 @@ public class ExamDialog extends Dialog {
         examNameET = findViewById(R.id.examNameET);
         hourET = findViewById(R.id.hourET);
         minuteET = findViewById(R.id.minuteET);
-        secondET = findViewById(R.id.minuteET);
+        secondET = findViewById(R.id.secondET);
 
         if (this.mode=="UPDATE") {
             HashMap<String, Object> exam = this.exams.get(this.position);
@@ -132,7 +132,7 @@ public class ExamDialog extends Dialog {
                     }
                 } else {    //수정
                     int rowCnt = examHelper.modifyExam(
-                            (Integer) exams.get(position).get("examPK"), examTitle, timeLimit);
+                            String.valueOf(exams.get(position).get("examPK")), examTitle, timeLimit);
                     if (rowCnt!=0) {
                         HashMap<String, Object> updatedExam = exams.get(position);
                         updatedExam.put("examTitle", examTitle);

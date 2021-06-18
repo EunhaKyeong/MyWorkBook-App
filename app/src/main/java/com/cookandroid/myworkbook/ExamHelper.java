@@ -59,12 +59,12 @@ public class ExamHelper extends SQLiteOpenHelper {
     }
 
     //exam update
-    public int modifyExam(int examPK, String examTitle, String timeLimit) {
+    public int modifyExam(String examPK, String examTitle, String timeLimit) {
         ContentValues values = new ContentValues();
         values.put("examTitle", examTitle);
         values.put("timeLimit", timeLimit);
 
-        return sqlDB.update(TABLE, values,"examPK=?", new String[]{String.valueOf(examPK)});
+        return sqlDB.update(TABLE, values,"examPK=?", new String[]{examPK});
     }
 
     //exam delete
