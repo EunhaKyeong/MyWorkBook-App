@@ -23,6 +23,8 @@
         <activity android:name=".ExamActivity" android:label="시험목록 액티비티"> </activity>
         <activity android:name=".QuestionActivity" android:label="문제목록 액티비티"> </activity>
         <activity android:name=".QuestionAddUpdateActivity" android:label="문제 생성/수정 액티비티"> </activity>
+        <activity android:name=".TestActivity" android:label="시험 화면 액티비티"> </activity>
+        <activity android:name=".ResultActivity" android:label="결과 화면 액티비티"> </activity>
     </application>
 
 </manifest>
