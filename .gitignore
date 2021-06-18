@@ -18,3 +18,6 @@ local.properties
 /app/src/main/res/drawable/book.png
 /app/src/main/assets/fonts/bmhannaair.ttf
 /myWorkBookDB.db
+/gif
+/app/src/main/res/drawable/baseline_arrow_back_36.xml
+/app/src/main/res/drawable/baseline_arrow_forward_36.xml
