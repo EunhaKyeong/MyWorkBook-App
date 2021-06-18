@@ -65,6 +65,14 @@ public class QuestionHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //select questionImg, questionDesc
+    public Cursor getImgDesc(String examPK) {
+        String sql = "SELECT questionPK, questionImg, questionDesc FROM QUESTION WHERE examPK=?";
+        Cursor cursor = sqlDB.rawQuery(sql, new String[]{examPK});
+
+        return cursor;
+    }
+
     //question update
     public int modifyQuestion(String questionPK, String questionTitle, byte[] questionImg,
                               String questionDesc, String answer) {

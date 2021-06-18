@@ -9,20 +9,28 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class QuestionActivity extends Activity {
     private ArrayList<HashMap<String, Object>> questions;
     private QuestionListAdapter listAdapter;
     private String examPK, timeLimit;
     private TextView tvExamTitle, tvTimeLimit;
-    private Button plusBtn;
+    private Button plusBtn, btnStart;
+    private QuestionHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_activity);
+
+        db = new QuestionHelper(QuestionActivity.this);
 
         Intent intent = getIntent();
         this.examPK = intent.getStringExtra("examPK");
@@ -31,6 +39,7 @@ public class QuestionActivity extends Activity {
         tvExamTitle = findViewById(R.id.tvExamTitle);
         plusBtn = findViewById(R.id.plusBtn);
         tvTimeLimit = findViewById(R.id.tvTimeLimit);
+        btnStart = findViewById(R.id.btnStart);
 
         tvExamTitle.setText(intent.getStringExtra("examTitle"));
         if (!timeLimit.equals("00:00:00")) {
@@ -46,6 +55,18 @@ public class QuestionActivity extends Activity {
                 intent.putExtra("mode", "CREATE");
                 intent.putExtra("examPK", examPK);
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toTestIntent = new Intent(QuestionActivity.this, TestActivity.class);
+                toTestIntent.putExtra("examPK", examPK);
+                toTestIntent.putExtra("examTitle", tvExamTitle.getText().toString());
+                toTestIntent.putExtra("timeLimit", timeLimit);
+
+                startActivity(toTestIntent);
             }
         });
     }
@@ -76,7 +97,6 @@ public class QuestionActivity extends Activity {
     }
 
     private void bindGrid() {
-        QuestionHelper db = new QuestionHelper(QuestionActivity.this);
         Cursor cursor = db.getAllQuestions(this.examPK);
         questions = new ArrayList<HashMap<String, Object>>();
 
