@@ -58,6 +58,16 @@ public class ExamHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //select userPK
+    public int getUserPKByquestionPK(int questionPK) {
+        String sql = "SELECT userPK FROM exam WHERE examPK=(SELECT examPK FROM question WHERE questionPK=" +
+                questionPK + ")";
+        Cursor cursor = sqlDB.rawQuery(sql, null);
+        cursor.moveToFirst();
+
+        return cursor.getInt(cursor.getColumnIndex("userPK"));
+    }
+
     //exam update
     public int modifyExam(String examPK, String examTitle, String timeLimit) {
         ContentValues values = new ContentValues();
