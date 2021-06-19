@@ -114,6 +114,8 @@ public class TestActivity extends Activity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishBtn.setText("나가기");
+
                 //사용자가 입력한 답 저장
                 try {
                     submitAnswer.set(currentQ, answerET.getText().toString());
