@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/questionNoTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingTop="13dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/bmhannaair"
+        android:text="No."
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/questionTitleTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="13dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/bmhannaair"
+        android:text="문제 제목"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/submitAnswerTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="13dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/bmhannaair"
+        android:text="제출 답안"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/answerTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="13dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/bmhannaair"
+        android:text="정답"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+</LinearLayout>

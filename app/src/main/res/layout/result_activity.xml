@@ -4,5 +4,127 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/examTitleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@color/mainYellow"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="20dp"
+        android:gravity="left|center"
+        android:fontFamily="@font/bmhannaair"
+        android:text="시험명"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="30dp"
+        android:gravity="center"
+        android:text="시험이 종료되었습니다."
+        android:fontFamily="@font/bmhannaair"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/elapsedTimeTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingTop="10dp"
+        android:gravity="center"
+        android:text="소요 시간 : "
+        android:fontFamily="@font/bmhannaair"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:background="#FFF2BE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:paddingTop="13dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/bmhannaair"
+            android:text="No."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:background="#FFF2BE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="13dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/bmhannaair"
+            android:text="문제 제목"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:background="#FFF2BE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="13dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/bmhannaair"
+            android:text="제출 답안"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:background="#FFF2BE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="13dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/bmhannaair"
+            android:text="정답"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/resultLV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp" />
+    <Button
+        android:id="@+id/goExamListBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:background="@color/mainYellow"
+        android:text="시험 목록"
+        android:fontFamily="@font/bmhannaair"
+        android:textStyle="bold"
+        android:textSize="25sp" />
 
 </LinearLayout>
