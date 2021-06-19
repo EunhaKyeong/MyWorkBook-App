@@ -73,6 +73,14 @@ public class QuestionHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //select questionPK, questionTitle, answer
+    public Cursor getTitleAnswers(String questionPks) {
+        String sql = "SELECT questionPK, questionTitle, answer FROM QUESTION WHERE questionPK IN (" + questionPks + ")";
+        Cursor cursor = sqlDB.rawQuery(sql, null);
+
+        return cursor;
+    }
+
     //question update
     public int modifyQuestion(String questionPK, String questionTitle, byte[] questionImg,
                               String questionDesc, String answer) {
