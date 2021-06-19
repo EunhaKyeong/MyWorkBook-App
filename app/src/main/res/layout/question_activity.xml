@@ -23,11 +23,12 @@
             android:layout_rowSpan="2"
             android:layout_column="0"
             android:layout_gravity="fill_vertical"
+            android:paddingBottom="5dp"
             android:fontFamily="@font/bmhannaair"
             android:gravity="left|center"
             android:text="문제 목록"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView
@@ -160,8 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:fontFamily="@font/bmhannaair"
