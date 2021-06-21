@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,7 +22,7 @@ public class ExamActivity extends Activity {
     private ArrayList<HashMap<String, Object>> exams = new ArrayList<HashMap<String, Object>>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exam_activity);
 
@@ -39,7 +37,6 @@ public class ExamActivity extends Activity {
 
         nicknameTV = findViewById(R.id.nicknameTV);
         plusBtn = findViewById(R.id.plusBtn);
-        addExamDialog = new ExamDialog(ExamActivity.this, this.userPK, exams);
 
         //화면에 닉네임 출력.
         nicknameTV.setText(this.nickname + "님");
@@ -47,9 +44,11 @@ public class ExamActivity extends Activity {
         //그리드뷰 만들기
         bindGrid();
 
+        //+버튼 누르면 시험 폴더를 생성하는 대화상자 보여주기
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addExamDialog = new ExamDialog(ExamActivity.this, userPK, exams);
                 addExamDialog.show();
             }
         });
