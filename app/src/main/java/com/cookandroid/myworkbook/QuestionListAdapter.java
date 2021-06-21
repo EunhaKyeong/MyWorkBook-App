@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +81,7 @@ public class QuestionListAdapter extends BaseAdapter {
                             case R.id.update:   //수정
                                 Intent intent = new Intent(context, QuestionAddUpdateActivity.class);
                                 intent.putExtra("mode", "UPDATE");
+                                intent.putExtra("position", position);
                                 intent.putExtra("question", questions.get(position));
                                 ((Activity) context).startActivityForResult(intent, 1);
                         }
