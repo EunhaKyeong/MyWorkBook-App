@@ -9,13 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class QuestionActivity extends Activity {
     private ArrayList<HashMap<String, Object>> questions;
@@ -30,8 +25,9 @@ public class QuestionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_activity);
 
-        db = new QuestionHelper(QuestionActivity.this);
+        db = new QuestionHelper(QuestionActivity.this); //qestion table 관련 DB 실행.
 
+        //시험 목록 화면을 통해 전달 받은 데이터
         Intent intent = getIntent();
         this.examPK = intent.getStringExtra("examPK");
         this.timeLimit = intent.getStringExtra("timeLimit");
@@ -46,8 +42,9 @@ public class QuestionActivity extends Activity {
             tvTimeLimit.setText("제한시간 : " + this.timeLimit);
         }
 
-        bindGrid();
+        bindGrid(); //list view 화면 구성하는 함수 호출.
 
+        //+ 버튼 누르면 문제를 추가하는 화면으로 이동.
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +55,7 @@ public class QuestionActivity extends Activity {
             }
         });
 
+        //시험 시작 버튼을 누르면 시험 진행 화면으로 이동.
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,10 +69,9 @@ public class QuestionActivity extends Activity {
         });
     }
 
+    //문제 생성, 수정 기능이 완료된 후 다시 문제 목록으로 돌아왔을 때 변경된 데이터를 화면에 보여줌.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("reequestionCode: " + requestCode);
-
         if (requestCode==0&&resultCode==RESULT_OK) {    //문제 생성 요청일 때
             HashMap<String, Object> newQuestion = new HashMap<String, Object>();
             newQuestion.put("questionPK", data.getStringExtra("questionPK"));
@@ -86,7 +83,8 @@ public class QuestionActivity extends Activity {
             questions.add(newQuestion);
 
         } else if (requestCode==1&&resultCode==RESULT_OK) { //문제 수정 요청일 때
-            int position = Integer.parseInt(data.getStringExtra("questionPK"))-1;
+            System.out.println(data.toString());
+            int position = data.getIntExtra("position", -1);
             questions.get(position).put("questionTitle", data.getStringExtra("questionTitle"));
             questions.get(position).put("questionImg", data.getByteArrayExtra("questionImg"));
             questions.get(position).put("questionDesc", data.getStringExtra("questionDesc"));
@@ -96,6 +94,7 @@ public class QuestionActivity extends Activity {
         listAdapter.notifyDataSetChanged();
     }
 
+    //리스트뷰 화면 구성하는 함수.
     private void bindGrid() {
         Cursor cursor = db.getAllQuestions(this.examPK);
         questions = new ArrayList<HashMap<String, Object>>();
