@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class ExamHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "myWorkBookDB.db";
     public static final String TABLE = "exam";
@@ -17,7 +15,7 @@ public class ExamHelper extends SQLiteOpenHelper {
     public static final String USERPK = "userPK";
     private SQLiteDatabase sqlDB = this.getWritableDatabase();
 
-    public ExamHelper(@Nullable Context context) {
+    public ExamHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -33,8 +31,6 @@ public class ExamHelper extends SQLiteOpenHelper {
 
     //exam insert
     public long addExam(String examTitle, String timeLimit, int userPK) {
-        System.out.println("addExam!!");
-
         ContentValues cv = new ContentValues();
         cv.put(EXAMTITLE, examTitle);
         cv.put(TIMELIMIT, timeLimit);

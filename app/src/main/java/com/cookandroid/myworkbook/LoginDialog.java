@@ -12,15 +12,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-
 public class LoginDialog extends Dialog {
     private Context context;
     private Button loginBtn, signupBtn;
-    private DatabaseHelper dbHelper;
+    private UserHelper dbHelper;
     private EditText idEdit, pwdEdit;
 
-    public LoginDialog(@NonNull MainActivity context) {
+    public LoginDialog(MainActivity context) {
         super(context);
         this.context = context;
     }
@@ -31,7 +29,7 @@ public class LoginDialog extends Dialog {
         setContentView(R.layout.login_dialog);
 
         //DB 설정
-        dbHelper = new DatabaseHelper(this.getContext());
+        dbHelper = new UserHelper(this.getContext());
 
         //다이얼로그 화면 전체화면으로
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -61,7 +59,6 @@ public class LoginDialog extends Dialog {
             //일치하는 회원 정보가 있는지 확인
             Cursor cursor = dbHelper.getUser(strId, strPwd);
             if (cursor.getCount()!=0) {
-                System.out.println("로그인 됐습니다.");
                 idEdit.setText("");
                 pwdEdit.setText("");
                 cursor.moveToFirst();

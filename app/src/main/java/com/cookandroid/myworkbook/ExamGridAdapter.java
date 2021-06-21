@@ -66,6 +66,7 @@ public class ExamGridAdapter extends BaseAdapter {
         viewHolder.tvId.setText(exam.get("examPK").toString());
         viewHolder.tvTimeLimit.setText(exam.get("examPK").toString());
 
+        //시험 폴더를 길게 클릭할 경우 -> 수정/삭제 메뉴 나타나도록!
         viewHolder.btnExam.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
