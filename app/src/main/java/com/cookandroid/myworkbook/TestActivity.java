@@ -76,11 +76,18 @@ public class TestActivity extends Activity {
         answerET = findViewById(R.id.answerET);
         changeQuestion(questionImgs.get(index), questionDescs.get(index));
 
-        //화살표 설정(첫번째 문제이므로 다음 버튼만 VISIBLE)
+        //화살표 설정
         backArrow = findViewById(R.id.backArrow);
         frontArrow = findViewById(R.id.frontArrow);
-        backArrow.setVisibility(View.INVISIBLE);
-        frontArrow.setVisibility(View.VISIBLE);
+        finishBtn = findViewById(R.id.finishBtn);
+        if (questionPKs.size()==1) {    //문제가 한개면 화살표 없고, 나가기 버튼이 아닌 답안지 제출로.
+            backArrow.setVisibility(View.INVISIBLE);
+            frontArrow.setVisibility(View.INVISIBLE);
+            finishBtn.setText("답안지 제출");
+        } else {
+            backArrow.setVisibility(View.INVISIBLE);
+            frontArrow.setVisibility(View.VISIBLE);
+        }
 
         //다음 문제 화살표 클릭 : 이전 문제에 사용자가 입력한 답 저장 -> 다음 문제로 이동.
         frontArrow.setOnClickListener(new View.OnClickListener() {
