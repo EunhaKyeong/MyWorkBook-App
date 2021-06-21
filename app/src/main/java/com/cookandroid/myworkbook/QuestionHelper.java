@@ -6,10 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-import java.util.HashMap;
-
 public class QuestionHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "myWorkBookDB.db";
     public static final String TABLE = "question";
