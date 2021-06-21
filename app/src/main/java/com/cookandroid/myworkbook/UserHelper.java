@@ -5,13 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class UserHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "myWorkBookDB.db";
     private SQLiteDatabase sqlDB = this.getWritableDatabase();;
 
-    public DatabaseHelper(@Nullable Context context) {
+    public UserHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -39,13 +37,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         return cursor.getString(cursor.getColumnIndex("nickname"));
-    }
-
-    //exam 정보 select
-    public Cursor getExams(int userPK) {
-        String query = "SELECT examTitle, examPK FROM exam WHERE userPK=" + userPK + ";";
-        Cursor cursor = sqlDB.rawQuery(query, null);
-
-        return cursor;
     }
 }
