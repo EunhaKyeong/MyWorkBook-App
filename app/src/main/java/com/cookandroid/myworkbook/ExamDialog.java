@@ -29,6 +29,7 @@ public class ExamDialog extends Dialog {
     private EditText examNameET, hourET, minuteET, secondET;
     private ArrayList<HashMap<String, Object>> exams = new ArrayList<HashMap<String, Object>>();
 
+    //시험 폴더 추가 다이얼로그
     public ExamDialog(Context context, int userPK, ArrayList<HashMap<String, Object>> exams) {
         super(context);
         this.mode = "ADD";
@@ -38,6 +39,7 @@ public class ExamDialog extends Dialog {
         this.exams = exams;
     }
 
+    //시험 폴더 수정 다이얼로그
     public ExamDialog(Context context, int userPK, ArrayList<HashMap<String, Object>> exams, int position) {
         super(context);
         this.mode="UPDATE";
@@ -46,10 +48,6 @@ public class ExamDialog extends Dialog {
         this.userPK = userPK;
         this.exams = exams;
         this.position = position;
-    }
-
-    public ArrayList<HashMap<String, Object>> getExams() {
-        return this.exams;
     }
 
     @Override
@@ -75,6 +73,7 @@ public class ExamDialog extends Dialog {
         minuteET = findViewById(R.id.minuteET);
         secondET = findViewById(R.id.secondET);
 
+        //시험 폴더 수정 다이얼로그에서 화면 설정.
         if (this.mode=="UPDATE") {
             HashMap<String, Object> exam = this.exams.get(this.position);
             tvTitle.setText("시험 폴더 수정");
@@ -101,6 +100,7 @@ public class ExamDialog extends Dialog {
                 }
             }
         });
+
         //추가 버튼을 클릭하면 시험 폴더 생성되는 이벤트 함수.
         btnAddUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +117,7 @@ public class ExamDialog extends Dialog {
                     timeLimit = hour + ":" + minute + ":" + second;
                 }
 
-                if (mode=="ADD") {  //삭제
+                if (mode=="ADD") {  //추가
                     long lastinsertId = examHelper.addExam(examTitle, timeLimit, userPK);
                     if (lastinsertId!=-1) {
                         exam.put("examPK", lastinsertId);
@@ -146,6 +146,7 @@ public class ExamDialog extends Dialog {
                 }
             }
         });
+
         //취소 버튼을 클릭하면 다이얼로그가 종료되는 이벤트 함수.
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
