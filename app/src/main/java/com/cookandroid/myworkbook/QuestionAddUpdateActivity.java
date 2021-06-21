@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +26,7 @@ public class QuestionAddUpdateActivity extends Activity {
 
     private QuestionHelper db;
     private String examPK, mode;
+    private int position = -1;
     HashMap<String, Object> question;
     private Button btnImage, btnAddUpdate, cancelBtn;
     private TextView tvTitle;
@@ -59,13 +59,15 @@ public class QuestionAddUpdateActivity extends Activity {
         etQAnswer = findViewById(R.id.etQAnswer);
         ivQContent = findViewById(R.id.ivQContent);
 
+        //문제 목록에서 전달받은 데이터
         Intent intent = getIntent();
-        if (intent.getStringExtra("mode").equals("CREATE")) {
+        if (intent.getStringExtra("mode").equals("CREATE")) {   //문제 추가 화면이면
             this.mode = "CREATE";
             this.examPK = intent.getStringExtra("examPK");
-        } else {
+        } else {    //문제 수정 화면이면
             this.mode = "UPDATE";
             this.question = (HashMap<String, Object>) intent.getSerializableExtra("question");
+            this.position = intent.getIntExtra("position", -1);
             tvTitle.setText("문제 수정하기");
             etQTitle.setText(question.get("questionTitle").toString());
             etQAnswer.setText(question.get("answer").toString());
@@ -84,6 +86,7 @@ public class QuestionAddUpdateActivity extends Activity {
             btnAddUpdate.setText("수정하기");
         }
 
+        //이미지 추가하기 버튼을 누르면 카메라 앱으로 전환.
         btnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,17 +95,17 @@ public class QuestionAddUpdateActivity extends Activity {
             }
         });
 
+        //추가 or 수정하기 버튼을 눌렀을 때
         btnAddUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title, content="", answer;
                 byte[] questionImg = null;
 
-
                 title = etQTitle.getText().toString();
-                if (etQContent.isEnabled()) {
+                if (etQContent.isEnabled()) {   //문제가 텍스트 형식이면
                     content = etQContent.getText().toString();
-                } else {
+                } else {    //문제가 이미지 형식이면
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     questionBitmap.compress(Bitmap.CompressFormat.PNG, 60, stream);
                     questionImg = stream.toByteArray();
@@ -113,7 +116,7 @@ public class QuestionAddUpdateActivity extends Activity {
                 boolean result = true;
 
                 switch (mode) {
-                    case "CREATE":
+                    case "CREATE":  //문제 생성일 경우
                         long insertedPK = db.addQuestion(title, questionImg, content, answer, examPK);
                         if (insertedPK>=0) {
                             questionPK = String.valueOf(insertedPK);
@@ -122,20 +125,22 @@ public class QuestionAddUpdateActivity extends Activity {
                         }
                         break;
 
-                        case "UPDATE":
-                            int updateResult = db.modifyQuestion(question.get("questionPK").toString(), title, questionImg, content, answer);
-                            if (updateResult!=0) {
-                                questionPK = question.get("questionPK").toString();
-                            } else {
-                                result = false;
-                            }
-                            break;
+                    case "UPDATE":  //문제 수정일 경우
+                        int updateResult = db.modifyQuestion(question.get("questionPK").toString(), title, questionImg, content, answer);
+                        if (updateResult!=0) {
+                            questionPK = question.get("questionPK").toString();
+                        } else {
+                            result = false;
+                        }
+                        break;
                 }
 
-                if (result) {
+                //DB에 Insert or Update 후 결과에 따라 문제 목록 화면에 데이터 전달하기
+                if (result) {   //DB에 Insert or Update가 성공적으로 실행된 경우.
                     Intent outIntent =
                             new Intent(QuestionAddUpdateActivity.this, QuestionActivity.class);
                     outIntent.putExtra("questionPK", questionPK);
+                    outIntent.putExtra("position", position);
                     outIntent.putExtra("questionTitle", title);
                     outIntent.putExtra("questionImg", questionImg);
                     outIntent.putExtra("questionDesc", content);
@@ -145,7 +150,7 @@ public class QuestionAddUpdateActivity extends Activity {
                             "완료!",
                             Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
+                } else {    //DB에 Insert or Update 중 오류가 발생했을 경우.
                     Toast.makeText(QuestionAddUpdateActivity.this,
                             "오류가 발생했습니다. 다시 한 번 시도해주세요.",
                             Toast.LENGTH_SHORT).show();
@@ -153,6 +158,7 @@ public class QuestionAddUpdateActivity extends Activity {
             }
         });
 
+        //취소 버튼을 누르면 문제 목록 화면으로 이동.
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,15 +166,6 @@ public class QuestionAddUpdateActivity extends Activity {
             }
         });
     }
-
-    // 권한 요청
-//    @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-//                grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
-//            System.out.println("Permission: " + permissions[0] + "was " + grantResults[0]);
-//        }
-//    }
 
     //카메라로 촬영한 사진을 가져와 이미지뷰에 띄우기
     @Override
@@ -198,5 +195,4 @@ public class QuestionAddUpdateActivity extends Activity {
                 break;
         }
     }
-
 }
