@@ -21,7 +21,7 @@ public class ResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         QuestionHelper questionDB = new QuestionHelper(ResultActivity.this);
         ExamHelper examDB = new ExamHelper(ResultActivity.this);
-        DatabaseHelper userDB = new DatabaseHelper(ResultActivity.this);
+        UserHelper userDB = new UserHelper(ResultActivity.this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
