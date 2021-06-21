@@ -22,7 +22,7 @@
             android:layout_columnWeight="3"
             android:gravity="left|center"
             android:fontFamily="@font/bmhannaair"
-            android:text="문제 목록"
+            android:text="시험 목록"
             android:textColor="@color/black"
             android:textSize="35sp"
             android:textStyle="bold" />
